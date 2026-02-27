@@ -1,0 +1,395 @@
+@import "tailwindcss";
+
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+
+  --color-primary: #7B0000;
+  /* Deep Royal Red */
+  --color-accent: #D4AF37;
+  /* Metallic Gold */
+  --color-accent-hover: #C5A028;
+  /* Darker Gold for hover */
+  --color-ivory: #FCFBF9;
+  /* Soft Ivory */
+}
+
+:root {
+  --background: #FCFBF9;
+  /* Soft Ivory Background */
+  --foreground: #1c1917;
+  /* Warm gray/black for text */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f0f0f;
+    /* Deep black/gray */
+    --foreground: #f5f5f4;
+    /* Warm white */
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+}
+
+/* ════════════════════════════════════════════════
+   SEAMLESS HERO → STATEMENT SECTION TRANSITION
+   ════════════════════════════════════════════════ */
+
+/* 1. Hero fades out at the bottom — dissolves into what's below */
+.hero-section,
+[class*="hero"],
+[class*="Hero"] {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 60px !important;
+  -webkit-mask-image: linear-gradient(to bottom,
+      black 0%,
+      black 72%,
+      rgba(0, 0, 0, 0.6) 88%,
+      transparent 100%);
+  mask-image: linear-gradient(to bottom,
+      black 0%,
+      black 72%,
+      rgba(0, 0, 0, 0.6) 88%,
+      transparent 100%);
+}
+
+/* 2. Statement section — dark warm gradient, no hard edges */
+.statement-section,
+[class*="statement"],
+[class*="family-section"],
+[class*="church-section"] {
+  position: relative;
+  z-index: 2;
+
+  /* Opens from near-black matching hero base, builds to deep red, fades back out */
+  background: linear-gradient(180deg,
+      #0f0000 0%,
+      #1a0000 8%,
+      #2a0000 22%,
+      #3a0000 45%,
+      #2a0000 70%,
+      #1a0000 88%,
+      #0f0000 100%) !important;
+
+  /* Kill every possible source of the hard line */
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+
+  /* Close sub-pixel rendering gaps */
+  margin-top: -2px !important;
+  margin-bottom: -2px !important;
+}
+
+/* 3. About section opens transparently so statement section dissolves into it */
+.about-section,
+[class*="about"],
+[class*="About"] {
+  position: relative;
+  z-index: 3;
+  background: linear-gradient(180deg,
+      #0f0000 0%,
+      #0D0000 6%,
+      #111111 100%) !important;
+  margin-top: -2px !important;
+  padding-top: 80px !important;
+  border-top: none !important;
+}
+
+/* 4. Global section reset — prevents any default browser gaps */
+section {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* ── About Us Heading Specificity Override ── */
+.about-section h1,
+.about-section h2,
+[class*="about"] h1,
+[class*="about"] h2,
+[class*="About"] h1,
+[class*="About"] h2 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem) !important;
+  font-weight: 700 !important;
+  font-family: var(--font-heading) !important;
+  color: #8B0000 !important;
+  line-height: 1.15 !important;
+}
+
+/* ════════════════════════════════════════════════
+   NUCLEAR SEAM LINE REMOVAL
+   ════════════════════════════════════════════════ */
+
+/* Nuclear option — targets every possible element at that seam */
+*+section,
+section+section,
+section+div,
+div+section {
+  border-top: none !important;
+  margin-top: 0 !important;
+}
+
+/* Target by background directly */
+[style*="background"],
+[style*="border"] {
+  border-top: none !important;
+}
+
+/* If it's a Next.js component wrapper */
+main>div,
+main>section {
+  border: none !important;
+  border-top: none !important;
+  outline: none !important;
+}
+
+/* Target the hero's bottom edge specifically */
+.hero-section,
+[class*="hero"],
+[class*="Hero"],
+main>section:first-child,
+main>div:first-child {
+  border-bottom: none !important;
+  margin-bottom: -3px !important;
+  padding-bottom: 0 !important;
+}
+
+/* ── Remove box from statement text wrapper ── */
+.statement-text,
+.statement-section>div,
+[class*="statement"]>div,
+[class*="statementText"],
+[class*="statement-text"],
+[class*="textBlock"],
+[class*="text-block"],
+[class*="TextBlock"],
+[class*="quoteBox"],
+[class*="quote-box"],
+[class*="contentBox"],
+[class*="content-box"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ════════════════════════════════════════════
+   GLOBAL TYPOGRAPHIC HIERARCHY + COLOUR FIX
+   ════════════════════════════════════════════ */
+
+/* Nav text */
+nav a,
+[class*="nav"] a,
+[class*="Nav"] a,
+header a {
+  font-family: 'Cinzel', serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: color 0.2s ease !important;
+}
+
+nav a:hover,
+header a:hover {
+  color: #ffffff !important;
+}
+
+/* Tier 1 — Section label */
+[class*="sectionLabel"],
+[class*="section-label"],
+[class*="eyebrow"],
+[class*="label"] {
+  font-family: 'Cinzel', serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.4em !important;
+  color: #D4AF37 !important;
+  text-transform: uppercase !important;
+}
+
+/* Tier 2 — Primary heading */
+.about-section h1,
+.about-section h2,
+[class*="about"] h1,
+[class*="About"] h1,
+[class*="about"] h2,
+[class*="About"] h2 {
+  font-family: 'Cinzel', serif !important;
+  font-size: clamp(3.2rem, 7vw, 5.5rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  color: #D4AF37 !important;
+  text-shadow: 0 0 60px rgba(212, 175, 55, 0.25) !important;
+  line-height: 1.1 !important;
+}
+
+/* Tier 3 — Subheading */
+.about-section h3,
+[class*="about"] h3,
+[class*="About"] h3,
+[class*="subheading"],
+[class*="subHeading"] {
+  font-family: 'Cinzel', serif !important;
+  font-size: clamp(1.3rem, 2.8vw, 2rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  color: rgba(212, 175, 55, 0.75) !important;
+  margin-top: 16px !important;
+  margin-bottom: 28px !important;
+}
+
+/* Tier 4 — Body paragraph */
+.about-section p,
+[class*="about"] p,
+[class*="About"] p {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(1rem, 1.8vw, 1.2rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.85 !important;
+  color: rgba(255, 215, 160, 0.82) !important;
+  max-width: 620px !important;
+}
+
+/* Bullet points */
+.about-section li,
+[class*="about"] li {
+  font-family: 'Cinzel', serif !important;
+  font-size: clamp(0.95rem, 1.7vw, 1.1rem) !important;
+  color: rgba(255, 215, 160, 0.75) !important;
+  line-height: 1.8 !important;
+}
+
+/* Tier 5 — Mission card titles */
+[class*="mission"] h3,
+[class*="mission"] h4,
+[class*="missionTitle"],
+[class*="cardTitle"] {
+  font-family: 'Cinzel', serif !important;
+  font-size: clamp(1rem, 2vw, 1.35rem) !important;
+  font-weight: 600 !important;
+  color: #D4AF37 !important;
+}
+
+/* Tier 6 — Scripture references */
+[class*="scripture"],
+[class*="verse"] {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-style: italic !important;
+  font-size: clamp(1.05rem, 2vw, 1.3rem) !important;
+  line-height: 1.9 !important;
+  color: rgba(255, 215, 160, 0.88) !important;
+}
+
+[class*="reference"],
+cite {
+  font-family: 'Cinzel', serif !important;
+  font-weight: 600 !important;
+  font-size: clamp(0.85rem, 1.6vw, 1rem) !important;
+  letter-spacing: 0.2em !important;
+  color: #D4AF37 !important;
+  margin-top: 10px !important;
+  display: block !important;
+}
+
+/* Global red-to-gold heading colour correction */
+h1,
+h2,
+h3,
+h4 {
+  color: #D4AF37 !important;
+}
+
+/* Keep red ONLY on the statement italic line and buttons */
+.line-1,
+[class*="line-1"],
+[class*="church-line"] {
+  color: #CC1111 !important;
+}
+
+/* Guard the Plan Visit button from generic nav CSS */
+nav a.plan-visit-btn,
+header a.plan-visit-btn {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  /* semibold */
+  letter-spacing: 0.15em !important;
+  color: var(--color-accent) !important;
+  text-transform: uppercase !important;
+}
+
+nav a.plan-visit-btn:hover,
+header a.plan-visit-btn:hover {
+  color: #7B0000 !important;
+}
+
+/* Force 3D context for card flipping */
+[style*="preserve-3d"] {
+  transform-style: preserve-3d !important;
+  -webkit-transform-style: preserve-3d !important;
+}
+
+[style*="backface-visibility"] {
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+/* Teachings section — kill any partition */
+.teachings-section,
+[id="teachings"],
+[id="messages"],
+[id="sermons"] {
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure cursor is always visible — dark background enforced on all sections */
+.messages-section,
+[id="messages"] {
+  background: linear-gradient(180deg, #0D0000 0%, #1a0a00 40%, #111111 100%) !important;
+  color: rgba(255, 215, 160, 0.82) !important;
+}
+
+/* Force remove any white backgrounds globally */
+section[style*="background: white"],
+section[style*="background:#fff"],
+section[style*="background: #fff"],
+section[style*="background-color: white"],
+section[style*="background-color:#fff"] {
+  background: #0D0000 !important;
+}
