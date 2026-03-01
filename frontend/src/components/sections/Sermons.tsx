@@ -155,19 +155,8 @@ export default function Teachings() {
                             className="font-cinzel font-bold text-[#D4AF37] tracking-[0.08em] leading-[1.1]"
                             style={{ fontSize: "clamp(3.2rem,7vw,5.5rem)", textShadow: "0 0 60px rgba(212,175,55,0.25)" }}
                         >
-                            MESSAGES
+                            TEACHINGS
                         </h2>
-                        <h3
-                            className="font-cinzel font-semibold tracking-[0.06em]"
-                            style={{
-                                fontSize: "clamp(1.3rem,2.8vw,2rem)",
-                                color: "rgba(212,175,55,0.80)",
-                                marginTop: "16px",
-                                marginBottom: "28px"
-                            }}
-                        >
-                            Latest Teachings
-                        </h3>
                     </motion.div>
 
                     {/* ── Featured sermon ── */}
